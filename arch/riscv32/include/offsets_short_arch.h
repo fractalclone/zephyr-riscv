@@ -1,7 +1,5 @@
-/* cpu.h - automatically selects the correct arch.h file to include */
-
 /*
- * Copyright (c) 1997-2014 Wind River Systems, Inc.
+ * Copyright (c) 2016 Jean-Paul Etienne <fractalclone@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +14,25 @@
  * limitations under the License.
  */
 
-#ifndef __ARCHCPU_H__
-#define __ARCHCPU_H__
+#ifndef _offsets_short_arch__h_
+#define _offsets_short_arch__h_
 
-#if defined(CONFIG_X86)
-#include <arch/x86/arch.h>
-#elif defined(CONFIG_ARM)
-#include <arch/arm/arch.h>
-#elif defined(CONFIG_ARC)
-#include <arch/arc/arch.h>
-#elif defined(CONFIG_NIOS2)
-#include <arch/nios2/arch.h>
-#elif defined(CONFIG_RISCV32)
-#include <arch/riscv32/arch.h>
-#else
-#error "Unknown Architecture"
-#endif
+#include <offsets.h>
 
-#endif /* __ARCHCPU_H__ */
+/* kernel */
+
+/* nothing for now */
+
+/* end - kernel */
+
+/* threads */
+
+#define _thread_offset_to_sp \
+	(___thread_t_callee_saved_OFFSET + ___callee_saved_t_sp_OFFSET)
+
+#define _thread_offset_to_retval \
+	(___thread_t_callee_saved_OFFSET + ___callee_saved_t_retval_OFFSET)
+
+/* end - threads */
+
+#endif /* _offsets_short_arch__h_ */
