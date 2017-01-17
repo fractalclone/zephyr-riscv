@@ -99,7 +99,7 @@ The command shall compile and run the `philosophers` application using the `qemu
 
 To exit qemu, press `Ctrl-a x`
 
-#### Compiling zephyr using external `riscv-gnu-toolchain`
+#### Compiling zephyr using an external `riscv-gnu-toolchain`
 If you want to use an external `riscv-gnu-toolchain`, configure zephyr to use the `riscv-gnu-toolchain` by exporting the following environment variables:
 ```sh
 $ export RISCV32_TOOLCHAIN_PATH=/path/to/riscv-toolchain
