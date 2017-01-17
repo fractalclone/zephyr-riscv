@@ -71,7 +71,7 @@ If you will use the zephyr-0.9-sdk, install it as follows:
 $ chmod +x zephyr-sdk-0.9-setup.run
 $ sudo ./zephyr-sdk-0.9-setup.run
 ```
-After installation the zephyr-SDK shall be found in `/opt/zephyr-sdk`, if the default target directory for the SDK has been chosen during the installation process.
+After installation, the zephyr-SDK shall be found in `/opt/zephyr-sdk`, if the default target directory for the SDK has been chosen during the installation process.
 
 ### Get `zephyr-riscv` and compile a sample app for the `qemu_riscv32` board
 
