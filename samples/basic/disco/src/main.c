@@ -7,18 +7,32 @@
 #include <zephyr.h>
 #include <device.h>
 #include <gpio.h>
+#include <board.h>
 
 /**
- * the demo assumes use of nucleo_f103rb board, adjust defines below
- * to fit your board
- */
+  * If LED1_GPIO_PORT, LED1_GPIO_PIN and LED2_GPIO_PIN are not provided
+  * within board.h, the demo assumes use of nucleo_f103rb board by default.
+  */
 
-/* we're going to use PB8 and PB5 */
-#define PORT "GPIOB"
-/* PB5 */
-#define LED1 5
-/* PB8 */
-#define LED2 8
+/* Change this if you have a LED connected to a custom port */
+#ifdef LED1_GPIO_PORT
+#define PORT    LED1_GPIO_PORT
+#else
+#define PORT    "GPIOB"
+#endif
+
+/* Change this if you have an LED connected to a custom pin */
+#ifdef LED1_GPIO_PIN
+#define LED1    LED1_GPIO_PIN
+#else
+#define LED1    5
+#endif
+
+#ifdef LED2_GPIO_PIN
+#define LED2    LED2_GPIO_PIN
+#else
+#define LED2    8
+#endif
 
 #define SLEEP_TIME	500
 
