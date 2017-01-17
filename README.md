@@ -25,23 +25,23 @@ The riscv32 board support characterizes the configuration of a given riscv32-bas
 - riscv32-qemu, supporting the sifive machine model
 - pulpino
 
-The riscv32 port has successfully been merged into the Zephyr Project master repository at https://gerrit.zephyrproject.org and shall be released in the Zephyr 1.7.
+The riscv32 port has successfully been merged into the Zephyr Project master repository at https://gerrit.zephyrproject.org and shall be released in Zephyr 1.7.
 
-The riscv toolchain (gcc, binutils, gdb) has successfully been merged into the zephyr SDK and shall be released in the 0.9 SDK version.
+The riscv toolchain (gcc, binutils, gdb) and riscv-qemu have successfully been merged into the zephyr SDK and shall be released in the 0.9 SDK version.
 A pre-release SDK binary can be obtained from the following link:
 
 https://jenkins.zephyrproject.org/job/meta-zephyr-sdk-merge/68/artifact/meta-zephyr-sdk/scripts/zephyr-sdk-0.9-setup.run
 
 ## Compiling `zephyr-riscv` for the `qemu_riscv32` board
 Requirements:
+
+either
+
+zephyr-sdk-0.9
+
+or
 - latest `riscv-gnu-toolchain` compiled for riscv32 
 - latest `riscv-qemu` supporting the sifive machine model
-
-You can download a riscv32 SDK at:
-
-https://github.com/fractalclone/riscv-binaries/blob/master/riscv32-sdk-x86_64.tar.xz
-
-The SDK comprises both the riscv-gnu-toolchain and riscv-qemu binaries. Upon extraction, the binaries will be found in `riscv32-sdk-x86_64/bin`
 
 If you want to compile your own toolchain and riscv-qemu, follow the steps below:
 
@@ -65,7 +65,16 @@ $ sudo make install
 ```
 After compilation, `qemu-system-riscv32` shall be found at `/opt/riscv/bin`
 
+### Installing the zephyr-SDK
+Install the zephyr-0.9-sdk as follows:
+```sh
+$ chmod +x zephyr-sdk-0.9-setup.run
+$ sudo ./zephyr-sdk-0.9-setup.run
+```
+After installation the zephyr-SDK shall be found in `/opt/zephyr-sdk`, if the default target directory for the SDK has been chosen during the installation process.
+
 ### Get `zephyr-riscv` and compile a sample app for the `qemu_riscv32` board
+
 Gettting the `zephyr-riscv` sources
 ```sh
 $ git clone https://github.com/fractalclone/zephyr-riscv.git
@@ -75,14 +84,24 @@ Within the `zephyr-riscv` directory, setup the zephyr environment variables as f
 ```sh
 $ source zephyr-env.sh
 ```
-Configure zephyr to use the `riscv-gnu-toolchain` by exporting the following environment variables:
+#### Compiling zephyr using the zephyr-sdk
+Configure zephyr to use the zephyr-sdk by exporting the following environment variables:
 ```sh
-$ export RISCV32_TOOLCHAIN_PATH=/opt/riscv
-$ export ZEPHYR_GCC_VARIANT=riscv32
+$ export ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk
+$ export ZEPHYR_GCC_VARIANT=zephyr
 ```
-If you are using the riscv32 SDK:
+Compile and run the `philosophers` sample app for the `qemu_riscv32` board as follows:
 ```sh
-$ export RISCV32_TOOLCHAIN_PATH=/path/to/riscv32-sdk-x86_64
+$ cd samples/philosophers
+$ make BOARD=qemu_riscv32 run
+```
+The command shall compile and run the `philosophers` application using the riscv-qemu found in the zephyr-sdk
+To exit qemu, press `Ctrl-a x`
+
+#### Compiling zephyr using external `riscv-gnu-toolchain`
+If you want to use an external `riscv-gnu-toolchain`, configure zephyr to use the `riscv-gnu-toolchain` by exporting the following environment variables:
+```sh
+$ export RISCV32_TOOLCHAIN_PATH=/path/to/riscv-toolchain
 $ export ZEPHYR_GCC_VARIANT=riscv32
 ```
 Compile the `philosophers` sample app for the `qemu_riscv32` board as follows:
@@ -92,13 +111,11 @@ $ make BOARD=qemu_riscv32
 ```
 Once compiled, the `zephyr.elf` file shall be found at `outdir/qemu_riscv32/zephyr.elf`
 
-### Running 'zephyr.elf' within `qemu-system-riscv32`
+### Running 'zephyr.elf' using an external `qemu-system-riscv32`
 Within the `philosophers` directory:
 ```sh
-$ /opt/riscv/bin/qemu-system-riscv32 -kernel outdir/qemu_riscv32/zephyr.elf -m 32 -machine sifive -nographic
+$ /path/to/qemu-system-riscv32 -kernel outdir/qemu_riscv32/zephyr.elf -m 32 -machine sifive -nographic
 ```
-If you are using the riscv32 SDK, replace `/opt/riscv` with the `path/to/riscv32-sdk-x86_64`
-
 To exit qemu, press `Ctrl-a x`
 
 ## Compiling `zephyr-riscv` for the `zedboard_pulpino` board
