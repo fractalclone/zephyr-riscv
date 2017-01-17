@@ -25,7 +25,12 @@ The riscv32 board support characterizes the configuration of a given riscv32-bas
 - riscv32-qemu, supporting the sifive machine model
 - pulpino
 
-The riscv32 port has been pushed for review to the Zephyr Project repository at https://gerrit.zephyrproject.org
+The riscv32 port has successfully been merged into the Zephyr Project master repository at https://gerrit.zephyrproject.org and shall be released in the Zephyr 1.7.
+
+The riscv toolchain (gcc, binutils, gdb) has successfully been merged into the zephyr SDK and shall be released in the 0.9 SDK version.
+A pre-release SDK binary can be obtained from the following link:
+
+https://jenkins.zephyrproject.org/job/meta-zephyr-sdk-merge/68/artifact/meta-zephyr-sdk/scripts/zephyr-sdk-0.9-setup.run
 
 ## Compiling `zephyr-riscv` for the `qemu_riscv32` board
 Requirements:
