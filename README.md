@@ -95,7 +95,8 @@ Compile and run the `philosophers` sample app for the `qemu_riscv32` board as fo
 $ cd samples/philosophers
 $ make BOARD=qemu_riscv32 run
 ```
-The command shall compile and run the `philosophers` application using the `qemu-system-riscv32` found in the zephyr-sdk
+The command shall compile and run the `philosophers` application using the `qemu-system-riscv32` found in the zephyr-sdk.
+
 To exit qemu, press `Ctrl-a x`
 
 #### Compiling zephyr using external `riscv-gnu-toolchain`
