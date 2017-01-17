@@ -66,7 +66,7 @@ $ sudo make install
 After compilation, `qemu-system-riscv32` shall be found at `/opt/riscv/bin`
 
 ### Installing the zephyr-SDK
-Install the zephyr-0.9-sdk as follows:
+If you will use the zephyr-0.9-sdk, install it as follows:
 ```sh
 $ chmod +x zephyr-sdk-0.9-setup.run
 $ sudo ./zephyr-sdk-0.9-setup.run
@@ -95,7 +95,7 @@ Compile and run the `philosophers` sample app for the `qemu_riscv32` board as fo
 $ cd samples/philosophers
 $ make BOARD=qemu_riscv32 run
 ```
-The command shall compile and run the `philosophers` application using the riscv-qemu found in the zephyr-sdk
+The command shall compile and run the `philosophers` application using the `qemu-system-riscv32` found in the zephyr-sdk
 To exit qemu, press `Ctrl-a x`
 
 #### Compiling zephyr using external `riscv-gnu-toolchain`
@@ -120,16 +120,16 @@ To exit qemu, press `Ctrl-a x`
 
 ## Compiling `zephyr-riscv` for the `zedboard_pulpino` board
 Compiling the zephyr for pulpino will require either:
-- the riscv32 SDK at https://github.com/fractalclone/riscv-binaries/blob/master/riscv32-sdk-x86_64.tar.xz, or
+- the zephyr-sdk-0.9, or
 - a riscv-gnu-toolchain compiled from sources at https://github.com/fractalclone/riscv-gnu-toolchain.git, or
 - the pulpino-specific toolchain at https://github.com/pulp-platform/ri5cy_gnu_toolchain
 
-The riscv32 SDK has a patch that allows the pulpino-specific code to be compiled with the latest `riscv-gnu-toolchain`. Using an unpatched generic `riscv-gnu-toolchain` won't work. This is due to the fact that the `eret` opcode required by pulpino has been removed in the latest `riscv-gnu-toolchain`.
+The zephyr-sdk-0.9 has a patch that allows the pulpino-specific code to be compiled with the latest `riscv-gnu-toolchain`. Using an unpatched generic `riscv-gnu-toolchain` won't work. This is due to the fact that the `eret` opcode required by pulpino has been removed in the latest `riscv-gnu-toolchain`.
 
 It is also to be noted that, within the latest `riscv-gnu-toolchain`, the `wfi` opcode encoding has changed from 0x10200073 to 0x10500073. However, pulpino only understands 0x10200073 and will generate an illegal instruction fault when trying to execute 0x10500073. Moreover, 0x10200073 is now used to encode the `sret` opcode. For this reason, the port of zephyr to riscv32 architecture comprises a `CONFIG_RISCV_GENERIC_TOOLCHAIN` config variable, which when set, will replace `wfi` by `sret` within the pulpino-specific code. 
 
-### Compiling a sample app for the `zedboard_pulpino` board using the riscv32 SDK
-Compiling zephyr for the `zedboard_pulpino`board using the riscv32 SDK is done the same way as for the `qemu_riscv32` board. Example, assuming that the environment variables have already been set, compiling the `philosophers` sample app is performed as follows within the `philosophers` directory:
+### Compiling a sample app for the `zedboard_pulpino` board using the zephyr-sdk
+Compiling zephyr for the `zedboard_pulpino`board using the zephyr-sdk is done the same way as for the `qemu_riscv32` board. Example, assuming that the zephyr-sdk environment variables have already been set, compiling the `philosophers` sample app is performed as follows within the `philosophers` directory:
 ```sh
 $ make BOARD=zedboard_pulpino
 ```
