@@ -37,7 +37,7 @@ Requirements:
 
 either
 
-zephyr-sdk-0.9
+- zephyr-sdk-0.9
 
 or
 - latest `riscv-gnu-toolchain` compiled for riscv32 
