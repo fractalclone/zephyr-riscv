@@ -27,10 +27,10 @@ The riscv32 board support characterizes the configuration of a given riscv32-bas
 
 The riscv32 port has successfully been merged into the Zephyr Project master repository at https://gerrit.zephyrproject.org and shall be released in Zephyr 1.7.
 
-The riscv toolchain (gcc, binutils, gdb) and riscv-qemu have successfully been merged into the zephyr SDK and shall be released in the 0.9 SDK version.
-A pre-release SDK binary can be obtained from the following link:
+The riscv toolchain (gcc, binutils, gdb) and riscv-qemu have successfully been merged into the zephyr SDK and has been released in the 0.9 SDK version.
+The 0.9 SDK binary can be obtained from the following link:
 
-https://jenkins.zephyrproject.org/job/meta-zephyr-sdk-merge/68/artifact/meta-zephyr-sdk/scripts/zephyr-sdk-0.9-setup.run
+https://nexus.zephyrproject.org/content/repositories/releases/org/zephyrproject/zephyr-sdk/0.9/zephyr-sdk-0.9-setup.run
 
 ## Compiling `zephyr-riscv` for the `qemu_riscv32` board
 Requirements:
