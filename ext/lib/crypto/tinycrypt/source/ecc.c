@@ -175,6 +175,10 @@ static uint32_t vli_add(uint32_t *p_result, uint32_t *p_left,
 	return l_carry;
 }
 
+#ifdef CONFIG_RISCV32
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+#endif
 
 /* Computes p_result = p_left * p_right. */
 static void vli_mult(uint32_t *p_result, uint32_t *p_left,
@@ -203,6 +207,10 @@ static void vli_mult(uint32_t *p_result, uint32_t *p_left,
 
 	p_result[word_size * 2 - 1] = (uint32_t)r01;
 }
+
+#ifdef CONFIG_RISCV32
+#pragma GCC pop_options
+#endif
 
 /* Computes p_result = p_left^2. */
 static void vli_square(uint32_t *p_result, uint32_t *p_left)
