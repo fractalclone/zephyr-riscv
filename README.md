@@ -139,7 +139,7 @@ The zephyr-sdk-0.9 has a patch that allows the pulpino-specific code to be compi
 It is also to be noted that, within the latest `riscv-gnu-toolchain`, the `wfi` opcode encoding has changed from 0x10200073 to 0x10500073. However, pulpino only understands 0x10200073 and will generate an illegal instruction fault when trying to execute 0x10500073. Moreover, 0x10200073 is now used to encode the `sret` opcode. For this reason, the port of zephyr to riscv32 architecture comprises a `CONFIG_RISCV_GENERIC_TOOLCHAIN` config variable, which when set, will replace `wfi` by `sret` within the pulpino-specific code. 
 
 ### Compiling a sample app for the `zedboard_pulpino` board using the zephyr-sdk
-Compiling zephyr for the `zedboard_pulpino`board using the zephyr-sdk is done the same way as for the `qemu_riscv32` board. Example, assuming that the zephyr-sdk environment variables have already been set, compiling the `philosophers` sample app is performed as follows within the `philosophers` directory:
+Assuming that the zephyr-sdk environment variables have already been set, compiling the `philosophers` sample app is performed as follows within the `philosophers` directory:
 ```sh
 $ make BOARD=zedboard_pulpino
 ```
