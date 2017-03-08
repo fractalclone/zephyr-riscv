@@ -32,7 +32,7 @@ The 0.9 SDK binary can be obtained from the following link:
 
 https://nexus.zephyrproject.org/content/repositories/releases/org/zephyrproject/zephyr-sdk/0.9/zephyr-sdk-0.9-setup.run
 
-## Compiling `zephyr-riscv` for the `qemu_riscv32` board
+## Getting and setting `zephyr-riscv` build environment
 Requirements:
 
 either
@@ -73,24 +73,39 @@ $ sudo ./zephyr-sdk-0.9-setup.run
 ```
 After installation, the zephyr-SDK shall be found in `/opt/zephyr-sdk` (if the default target directory for the SDK has been chosen during the installation process).
 
-### Get `zephyr-riscv` and compile a sample app for the `qemu_riscv32` board
+### Getting the `zephyr-riscv` sources
+Since riscv support is now available in the Zephyr Project master repository, you can either get the zephyr sources from the 
+from the zephyr-riscv github repository or from Zephyr Project master repository as follows:
 
-Gettting the `zephyr-riscv` sources
+Github repository
 ```sh
 $ git clone https://github.com/fractalclone/zephyr-riscv.git
 $ cd zephyr-riscv
 ```
+Zephyr Project master repository
+```sh
+$ git clone https://gerrit.zephyrproject.org/r/zephyr zephyr-riscv
+$ cd zephyr-riscv
+```
+### Setting zephyr build environment
 Within the `zephyr-riscv` directory, setup the zephyr environment variables as follows:
 ```sh
 $ source zephyr-env.sh
 ```
-#### Compiling zephyr using the zephyr-sdk
-Configure zephyr to use the zephyr-sdk by exporting the following environment variables:
+#### Settings to compile zephyr using the zephyr-sdk
+To compile zephyr using the zephyr-sdk, export the following environment variables:
 ```sh
 $ export ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk
 $ export ZEPHYR_GCC_VARIANT=zephyr
 ```
-Compile and run the `philosophers` sample app for the `qemu_riscv32` board as follows:
+#### Settings to compile zephyr using an external `riscv-gnu-toolchain`
+If you want to use an external `riscv-gnu-toolchain`, configure zephyr to use the `riscv-gnu-toolchain` by exporting the following environment variables:
+```sh
+$ export RISCV32_TOOLCHAIN_PATH=/path/to/riscv-toolchain
+$ export ZEPHYR_GCC_VARIANT=riscv32
+```
+## Compiling `zephyr-riscv` for the `qemu_riscv32` board
+### Compile and run the `philosophers` sample app for the `qemu_riscv32` board using the zephyr-sdk
 ```sh
 $ cd samples/philosophers
 $ make BOARD=qemu_riscv32 run
@@ -99,13 +114,7 @@ The command shall compile and run the `philosophers` application using the `qemu
 
 To exit qemu, press `Ctrl-a x`
 
-#### Compiling zephyr using an external `riscv-gnu-toolchain`
-If you want to use an external `riscv-gnu-toolchain`, configure zephyr to use the `riscv-gnu-toolchain` by exporting the following environment variables:
-```sh
-$ export RISCV32_TOOLCHAIN_PATH=/path/to/riscv-toolchain
-$ export ZEPHYR_GCC_VARIANT=riscv32
-```
-Compile the `philosophers` sample app for the `qemu_riscv32` board as follows:
+### Compile only the `philosophers` sample app for the `qemu_riscv32` board
 ```sh
 $ cd samples/philosophers
 $ make BOARD=qemu_riscv32
