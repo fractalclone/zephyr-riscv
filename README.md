@@ -194,23 +194,25 @@ The following assumes that you already have an arty fpga board (https://referenc
 - get started with the arty board running the SiFive FE310 SOC
 
 To load the `zephyr.elf` image on the arty board you will require:
-- the Sifive freedom-e-sdk available at https://github.com/sifive/freedom-e-sdk. More specifically, the `openocd` tool available within the freedom-e-sdk. 
-- as described above, the olimex ARM-USB-TINY JTAG to flash the zephyr.elf image on the arty board.
+- the Sifive `freedom-e-sdk` available at https://github.com/sifive/freedom-e-sdk. More specifically, the `openocd` tool available within the `freedom-e-sdk`. 
+- as described above, the olimex ARM-USB-TINY JTAG to flash the `zephyr.elf` image on the arty board.
 
-Once you've compiled the tools available in the freedom-e-sdk, the openocd binary will be found at `/path/to/freedom-e-sdk/toolchain/bin/openocd`
+Once you've compiled the tools available in the `freedom-e-sdk`, the `openocd` binary will be found at `/path/to/freedom-e-sdk/toolchain/bin/openocd`
 
 To flash the `zephyr.elf` on the arty board do the following:
 - Ensure that the olimex ARM-USB-TINY JTAG is connected to you PC and the arty board
 - the arty board is powered on
-- extend the PATH variable with the freedom-e-sdk/toolchain/bin directory as follows:
+- extend the `PATH` variable with the `freedom-e-sdk/toolchain/bin` directory as follows:
   ```sh
   export PATH=/path/to/freedom-e-sdk/toolchain/bin:$PATH
   ```
-- load the `zephyr.elf` using the freedom-e-sdk utility script `openocd_upload.sh` as follows (assuming that you are in the `philosophers` directory):
+- load the `zephyr.elf` using the freedom-e-sdk utility script `openocd_upload.sh` as follows:
+
+Assuming that you are in the `philosophers` directory
   ```sh
   /path/to/freedom-e-sdk/bsp/tools/openocd_upload.sh \
   outdir/arty_fe310/zephyr.elf \
   /path/to/freedom-e-sdk/bsp/env/freedom-e300-arty/openocd.cfg
   ```
 Upon successful load, you should see the philosophers application running in the arty board UART console.
-You can also test the `samples/basic/disco_fever` (to increase or decrease LEDS blink speed press respectively BTN0 and BTN1 on the arty board), `samples/basic/blinky`, `samples/basic/button` (press BTN0 on arty board), `samples/basic/disco` and `samples/shell` apps for arty_fe310 board.
+You can also test the `samples/basic/disco_fever` (to increase or decrease LEDS blink speed press respectively BTN0 and BTN1 on the arty board), `samples/basic/blinky`, `samples/basic/button` (press BTN0 on arty board), `samples/basic/disco` and `samples/shell` apps for the `arty_fe310` board.
