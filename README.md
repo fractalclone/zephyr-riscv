@@ -180,20 +180,21 @@ Compile the philosophers application for the `zedboard_pulpino` board
 ```sh
 make BOARD=zedboard_pulpino
 ```
-### Compiling `zephyr-riscv` for the `arty_fe310` board
+### Compiling the `philosophers` sample app for the `arty_fe310` board
 Assuming that the zephyr-sdk environment variables have already been set, compiling the `philosophers` sample app for the `arty_fe310` board is performed as follows within the `philosophers` directory:
 ```sh
 $ make BOARD=arty_fe310
 ```
-After compilation, the `zephyr.elf` file will be found at `outdir/arty_fe310/zephyr.s19`
+After compilation, the `zephyr.elf` binary will be found at `outdir/arty_fe310/zephyr.elf`
 
-### Loading the `zephyr.elf` image on the arty board
+### Loading the `zephyr.elf` binary on the arty board
 The following assumes that you already have an arty fpga board (https://reference.digilentinc.com/reference/programmable-logic/arty/start) running the SiFive FE310 SOC. If not, register yourself to the sifive developer's website (https://dev.sifive.com) to get the SiFive FE310 FPGA bitstream for the arty board and get info about how to:
 - flash the SiFive FE310 bitstream on the arty board
-- connect the olimex ARM-USB-TINY JTAG to the arty board (https://www.olimex.com/Products/ARM/JTAG/ARM-USB-TINY) to flash riscv application binaries
+- connect the olimex ARM-USB-TINY JTAG to the arty board (https://www.olimex.com/Products/ARM/JTAG/ARM-USB-TINY) to flash riscv32 binaries
+- get started with the arty board running the SiFive FE310 SOC
 
 To load the `zephyr.elf` image on the arty board you will require:
-- the Sifive freedom-e-sdk available at https://github.com/sifive/freedom-e-sdk. More specifically, the openocd tool available within the freedom-e-sdk. 
+- the Sifive freedom-e-sdk available at https://github.com/sifive/freedom-e-sdk. More specifically, the `openocd` tool available within the freedom-e-sdk. 
 - as described above, the olimex ARM-USB-TINY JTAG to flash the zephyr.elf image on the arty board.
 
 Once you've compiled the tools available in the freedom-e-sdk, the openocd binary will be found at `/path/to/freedom-e-sdk/toolchain/bin/openocd`
@@ -207,7 +208,9 @@ To flash the `zephyr.elf` on the arty board do the following:
   ```
 - load the `zephyr.elf` using the freedom-e-sdk utility script `openocd_upload.sh` as follows (assuming that you are in the `philosophers` directory):
   ```sh
-  /path/to/freedom-e-sdk/bsp/tools/openocd_upload.sh outdir/arty_fe310/zephyr.elf /path/to/freedom-e-sdk/bsp/env/freedom-e300-arty/openocd.cfg
+  /path/to/freedom-e-sdk/bsp/tools/openocd_upload.sh \
+  outdir/arty_fe310/zephyr.elf \
+  /path/to/freedom-e-sdk/bsp/env/freedom-e300-arty/openocd.cfg
   ```
 Upon successful load, you should see the philosophers application running in the arty board UART console.
-You can also test the `samples/basic/disco_fever`, `samples/basic/blinky`, `samples/basic/button`, `samples/basic/disco` and `samples/shell` apps for arty_fe310 board.
+You can also test the `samples/basic/disco_fever` (to increase or decrease LEDS blink speed press respectively BTN0 and BTN1 on the arty board), `samples/basic/blinky`, `samples/basic/button` (press BTN0 on arty board), `samples/basic/disco` and `samples/shell` apps for arty_fe310 board.
