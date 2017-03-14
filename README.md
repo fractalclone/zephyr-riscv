@@ -206,7 +206,7 @@ To flash the `zephyr.elf` on the arty board do the following:
   ```sh
   export PATH=/path/to/freedom-e-sdk/toolchain/bin:$PATH
   ```
-- load the `zephyr.elf` using the freedom-e-sdk utility script `openocd_upload.sh` as follows:
+- load the `zephyr.elf` using the `freedom-e-sdk` utility script `openocd_upload.sh` as follows:
 
 Assuming that you are in the `philosophers` directory
   ```sh
@@ -215,4 +215,4 @@ Assuming that you are in the `philosophers` directory
   /path/to/freedom-e-sdk/bsp/env/freedom-e300-arty/openocd.cfg
   ```
 Upon successful load, you should see the philosophers application running in the arty board UART console.
-You can also test the `samples/basic/disco_fever` (to increase or decrease LEDS blink speed press respectively BTN0 and BTN1 on the arty board), `samples/basic/blinky`, `samples/basic/button` (press BTN0 on arty board), `samples/basic/disco` and `samples/shell` apps for the `arty_fe310` board.
+You can also test the `samples/basic/disco_fever` (to increase or decrease LEDS blink speed, press respectively BTN0 or BTN1 on the arty board), `samples/basic/blinky`, `samples/basic/button` (press BTN0 on arty board), `samples/basic/disco` and `samples/shell` apps for the `arty_fe310` board.
