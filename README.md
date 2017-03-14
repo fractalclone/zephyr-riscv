@@ -200,7 +200,7 @@ To load the `zephyr.elf` image on the arty board you will require:
 Once you've compiled the tools available in the `freedom-e-sdk`, the `openocd` binary will be found at `/path/to/freedom-e-sdk/toolchain/bin/openocd`
 
 To flash the `zephyr.elf` on the arty board do the following:
-- Ensure that the olimex ARM-USB-TINY JTAG is connected to you PC and the arty board
+- Ensure that the olimex ARM-USB-TINY JTAG is connected to your PC and the arty board
 - the arty board is powered on
 - extend the `PATH` variable with the `freedom-e-sdk/toolchain/bin` directory as follows:
   ```sh
