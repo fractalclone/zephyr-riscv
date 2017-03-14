@@ -24,8 +24,9 @@ The riscv32 board support characterizes the configuration of a given riscv32-bas
 `zephyr-riscv` currently handles the following SOCs:
 - riscv32-qemu, supporting the sifive machine model
 - pulpino
+- SiFive Freedom E310
 
-The riscv32 port has successfully been merged into the Zephyr Project master repository at https://gerrit.zephyrproject.org and shall be released in Zephyr 1.7.
+The riscv32 port has successfully been merged into the Zephyr Project master repository at https://gerrit.zephyrproject.org and shall be released in Zephyr 1.7. **The SiFive FE310 SOC port is available only in the zephyr-riscv github repository for time being.**
 
 The riscv toolchain (gcc, binutils, gdb) and riscv-qemu have successfully been merged into the zephyr SDK and has been released in the 0.9 SDK version.
 The 0.9 SDK binary can be obtained from the following link:
@@ -65,7 +66,7 @@ $ sudo make install
 ```
 After compilation, `qemu-system-riscv32` shall be found at `/opt/riscv/bin`
 
-### Installing the zephyr-SDK
+### Installing the zephyr-SDK (preferred)
 If you will use the zephyr-0.9-sdk, install it as follows:
 ```sh
 $ chmod +x zephyr-sdk-0.9-setup.run
@@ -179,3 +180,34 @@ Compile the philosophers application for the `zedboard_pulpino` board
 ```sh
 make BOARD=zedboard_pulpino
 ```
+### Compiling `zephyr-riscv` for the `arty_fe310` board
+Assuming that the zephyr-sdk environment variables have already been set, compiling the `philosophers` sample app for the `arty_fe310` board is performed as follows within the `philosophers` directory:
+```sh
+$ make BOARD=arty_fe310
+```
+After compilation, the `zephyr.elf` file will be found at `outdir/arty_fe310/zephyr.s19`
+
+### Loading the `zephyr.elf` image on the arty board
+The following assumes that you already have an arty fpga board (https://reference.digilentinc.com/reference/programmable-logic/arty/start) running the SiFive FE310 SOC. If not, register yourself to the sifive developer's website (https://dev.sifive.com) to get the SiFive FE310 FPGA bitstream for the arty board and get info about how to:
+- flash the SiFive FE310 bitstream on the arty board
+- connect the olimex ARM-USB-TINY JTAG to the arty board (https://www.olimex.com/Products/ARM/JTAG/ARM-USB-TINY) to flash riscv application binaries
+
+To load the `zephyr.elf` image on the arty board you will require:
+- the Sifive freedom-e-sdk available at https://github.com/sifive/freedom-e-sdk. More specifically, the openocd tool available within the freedom-e-sdk. 
+- as described above, the olimex ARM-USB-TINY JTAG to flash the zephyr.elf image on the arty board.
+
+Once you've compiled the tools available in the freedom-e-sdk, the openocd binary will be found at `/path/to/freedom-e-sdk/toolchain/bin/openocd`
+
+To flash the `zephyr.elf` on the arty board do the following:
+- Ensure that the olimex ARM-USB-TINY JTAG is connected to you PC and the arty board
+- the arty board is powered on
+- extend the PATH variable with the freedom-e-sdk/toolchain/bin directory as follows:
+  ```sh
+  export PATH=/path/to/freedom-e-sdk/toolchain/bin:$PATH
+  ```
+- load the `zephyr.elf` using the freedom-e-sdk utility script `openocd_upload.sh` as follows (assuming that you are in the `philosophers` directory):
+  ```sh
+  /path/to/freedom-e-sdk/bsp/tools/openocd_upload.sh outdir/arty_fe310/zephyr.elf /path/to/freedom-e-sdk/bsp/env/freedom-e300-arty/openocd.cfg
+  ```
+Upon successful load, you should see the philosophers application running in the arty board UART console.
+You can also test the `samples/basic/disco_fever`, `samples/basic/blinky`, `samples/basic/button`, `samples/basic/disco` and `samples/shell` apps for arty_fe310 board.
