@@ -1,0 +1,6 @@
+if BOARD_ARTY_FE310
+
+config BOARD
+	default "arty_fe310"
+
+endif
