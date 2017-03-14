@@ -195,13 +195,13 @@ The following assumes that you already have an arty fpga board (https://referenc
 
 To load the `zephyr.elf` image on the arty board you will require:
 - the Sifive `freedom-e-sdk` available at https://github.com/sifive/freedom-e-sdk. More specifically, the `openocd` tool available within the `freedom-e-sdk`. 
-- as described above, the olimex ARM-USB-TINY JTAG to flash the `zephyr.elf` image on the arty board.
+- the olimex ARM-USB-TINY JTAG to flash the `zephyr.elf` image on the arty board.
 
 Once you've compiled the tools available in the `freedom-e-sdk`, the `openocd` binary will be found at `/path/to/freedom-e-sdk/toolchain/bin/openocd`
 
 To flash the `zephyr.elf` on the arty board do the following:
-- Ensure that the olimex ARM-USB-TINY JTAG is connected to your PC and the arty board
-- the arty board is powered on
+- ensure that the olimex ARM-USB-TINY JTAG is connected to your PC and the arty board
+- ensure that the arty board is powered on
 - extend the `PATH` variable with the `freedom-e-sdk/toolchain/bin` directory as follows:
   ```sh
   export PATH=/path/to/freedom-e-sdk/toolchain/bin:$PATH
