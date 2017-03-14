@@ -1,0 +1,4 @@
+
+config BOARD_ARTY_FE310
+	bool "Arty FE310 target"
+	depends on SOC_RISCV32_FE310
