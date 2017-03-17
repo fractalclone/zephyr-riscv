@@ -105,6 +105,9 @@
 
 #define FE310_PLIC_MAX_PRIORITY      7
 
+/* Clock controller. */
+#define PRCI_BASE_ADDR               0x10008000
+
 /* Timer configuration */
 #define RISCV_MTIME_BASE             0x0200BFF8
 #define RISCV_MTIMECMP_BASE          0x02004000
