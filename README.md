@@ -29,9 +29,9 @@ The riscv32 board support characterizes the configuration of a given riscv32-bas
 The riscv32 port has successfully been merged into the Zephyr Project master repository at https://gerrit.zephyrproject.org and shall be released in Zephyr 1.7. **The SiFive FE310 SOC port is available only in the zephyr-riscv github repository for the time being.**
 
 The riscv toolchain (gcc, binutils, gdb) and riscv-qemu have successfully been merged into the zephyr SDK and has been released in the 0.9 SDK version.
-The 0.9 SDK binary can be obtained from the following link:
+Latest 0.9.1 SDK binary can be obtained from the following link:
 
-https://nexus.zephyrproject.org/content/repositories/releases/org/zephyrproject/zephyr-sdk/0.9/zephyr-sdk-0.9-setup.run
+https://github.com/zephyrproject-rtos/meta-zephyr-sdk/releases/download/0.9.1/zephyr-sdk-0.9.1-setup.run
 
 ## Getting and setting `zephyr-riscv` build environment
 Requirements:
