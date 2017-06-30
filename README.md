@@ -67,10 +67,10 @@ $ sudo make install
 After compilation, `qemu-system-riscv32` shall be found at `/opt/riscv/bin`
 
 ### Installing the zephyr-SDK (preferred)
-If you will use the zephyr-0.9-sdk, install it as follows:
+If you will use the zephyr-0.9.1-sdk, install it as follows:
 ```sh
-$ chmod +x zephyr-sdk-0.9-setup.run
-$ sudo ./zephyr-sdk-0.9-setup.run
+$ chmod +x zephyr-sdk-0.9.1-setup.run
+$ sudo ./zephyr-sdk-0.9.1-setup.run
 ```
 After installation, the zephyr-SDK shall be found in `/opt/zephyr-sdk` (if the default target directory for the SDK has been chosen during the installation process).
 
@@ -131,11 +131,11 @@ To exit qemu, press `Ctrl-a x`
 
 ## Compiling `zephyr-riscv` for the `zedboard_pulpino` board
 Compiling the zephyr for pulpino will require either:
-- the zephyr-sdk-0.9, or
+- the zephyr-sdk-0.9.1, or
 - a riscv-gnu-toolchain compiled from sources at https://github.com/fractalclone/riscv-gnu-toolchain.git, or
 - the pulpino-specific toolchain at https://github.com/pulp-platform/ri5cy_gnu_toolchain
 
-The zephyr-sdk-0.9 has a patch that allows the pulpino-specific code to be compiled with the latest `riscv-gnu-toolchain`. Using an unpatched generic `riscv-gnu-toolchain` won't work. This is due to the fact that the `eret` opcode required by pulpino has been removed in the latest `riscv-gnu-toolchain`.
+The zephyr-sdk-0.9.1 has a patch that allows the pulpino-specific code to be compiled with the latest `riscv-gnu-toolchain`. Using an unpatched generic `riscv-gnu-toolchain` won't work. This is due to the fact that the `eret` opcode required by pulpino has been removed in the latest `riscv-gnu-toolchain`.
 
 It is also to be noted that, within the latest `riscv-gnu-toolchain`, the `wfi` opcode encoding has changed from 0x10200073 to 0x10500073. However, pulpino only understands 0x10200073 and will generate an illegal instruction fault when trying to execute 0x10500073. Moreover, 0x10200073 is now used to encode the `sret` opcode. For this reason, the port of zephyr to riscv32 architecture comprises a `CONFIG_RISCV_GENERIC_TOOLCHAIN` config variable, which when set, will replace `wfi` by `sret` within the pulpino-specific code. 
 
