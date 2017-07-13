@@ -33,41 +33,8 @@ Latest 0.9.1 SDK binary can be obtained from the following link:
 
 https://github.com/zephyrproject-rtos/meta-zephyr-sdk/releases/download/0.9.1/zephyr-sdk-0.9.1-setup.run
 
-## Getting and setting `zephyr-riscv` build environment
-Requirements:
-
-either
-
-- zephyr-sdk-0.9.1
-
-or
-- latest `riscv-gnu-toolchain` compiled for riscv32 
-- latest `riscv-qemu` supporting the sifive machine model
-
-If you want to compile your own toolchain and riscv-qemu, follow the steps below:
-
-### Getting and compiling the `riscv-gnu-toolchain`
-```sh
-$ git clone --recursive https://github.com/fractalclone/riscv-gnu-toolchain.git
-$ cd riscv-gnu-toolchain
-$ ./configure --prefix=/opt/riscv --with-xlen=32 --with-arch=RV32IMAFD
-$ sudo make -j
-```
-After compilation, the `riscv-gnu-toolchain` shall be found at `/opt/riscv`
-
-### Getting and compiling `riscv-qemu`
-```sh
-$ git clone https://github.com/riscv/riscv-qemu
-$ cd riscv-qemu
-$ git submodule update --init pixman
-$ ./configure --target-list=riscv64-softmmu,riscv32-softmmu --prefix=/opt/riscv
-$ make -j
-$ sudo make install
-```
-After compilation, `qemu-system-riscv32` shall be found at `/opt/riscv/bin`
-
-### Installing the zephyr-SDK (preferred)
-If you will use the zephyr-0.9.1-sdk, install it as follows:
+### Installing the zephyr-SDK
+The zephyr-0.9.1-sdk is installed as follows:
 ```sh
 $ chmod +x zephyr-sdk-0.9.1-setup.run
 $ sudo ./zephyr-sdk-0.9.1-setup.run
@@ -100,7 +67,7 @@ $ export ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk
 $ export ZEPHYR_GCC_VARIANT=zephyr
 ```
 #### Settings to compile zephyr using an external `riscv-gnu-toolchain`
-If you want to use an external `riscv-gnu-toolchain`, configure zephyr to use the `riscv-gnu-toolchain` by exporting the following environment variables:
+If you want to use an external `riscv-gnu-toolchain`, this can be done by exporting the following environment variables:
 ```sh
 $ export RISCV32_TOOLCHAIN_PATH=/path/to/riscv-toolchain
 $ export ZEPHYR_GCC_VARIANT=riscv32
