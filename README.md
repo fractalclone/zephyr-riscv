@@ -147,7 +147,7 @@ Compile the philosophers application for the `zedboard_pulpino` board
 ```sh
 make BOARD=zedboard_pulpino
 ```
-### Compiling the `philosophers` sample app for the `arty_fe310` board
+## Compiling the `philosophers` sample app for the `arty_fe310` board
 Assuming that the zephyr-sdk environment variables have already been set, compiling the `philosophers` sample app for the `arty_fe310` board is performed as follows within the `philosophers` directory:
 ```sh
 $ make BOARD=arty_fe310
